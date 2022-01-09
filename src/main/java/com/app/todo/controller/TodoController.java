@@ -51,4 +51,17 @@ public class TodoController {
             return ResponseEntity.badRequest().body(response);
         }
     }
+
+    @GetMapping
+    public ResponseEntity<?> retrieveTodoList() {
+        String temporaryUserId = "temporary-user";
+
+        List<TodoEntity> entities = service.retrieve(temporaryUserId);
+
+        List<TodoDto> dtos = entities.stream().map(TodoDto::new)
+                .collect(Collectors.toList());
+
+        ResponseDto<TodoDto> response = ResponseDto.<TodoDto>builder().data(dtos).build();
+        return ResponseEntity.ok().body(response);
+    }
 }
