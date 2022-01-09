@@ -29,7 +29,7 @@ public class TodoService {
         validate(entity);
 
         repository.save(entity);
-        log.info("Entity Id : {} is saved.",entity.getId());
+        log.info("Entity Id : {} is saved.", entity.getId());
 
         return repository.findByUserId(entity.getUserId());
     }
@@ -50,6 +50,21 @@ public class TodoService {
 
             repository.save(todo);
         });
+
+        return retrieve(entity.getUserId());
+    }
+
+    public List<TodoEntity> delete(final TodoEntity entity) {
+
+        validate(entity);
+
+        try {
+            repository.delete(entity);
+        } catch (Exception e) {
+            log.error("error deleting entity {} {}", entity.getId(), e);
+
+            throw new RuntimeException("error deleting entity " + entity.getId());
+        }
 
         return retrieve(entity.getUserId());
     }
