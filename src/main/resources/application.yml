@@ -1,0 +1,44 @@
+
+# common
+
+spring:
+  profiles:
+    group:
+      "local": "develop"
+      "dev": "develop"
+      "prod": "production"
+
+---
+# develop
+
+spring:
+  config:
+    activate:
+      on-profile: "develop"
+
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MYSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #show_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        default_batch_fetch_size: 100
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+#    org.hibernate.type: trace
+
+server:
+  front-end: http://localhost:3000
+
+jwt:
+  secret-key: test

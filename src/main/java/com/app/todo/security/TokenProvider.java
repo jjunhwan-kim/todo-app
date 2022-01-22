@@ -16,7 +16,7 @@ import java.util.Date;
 @Service
 public class TokenProvider {
 
-    @Value("${token.secret-key}")
+    @Value("${jwt.secret-key}")
     private String secretKey;
 
     public String create(UserEntity userEntity) {
