@@ -1,0 +1,23 @@
+language: java
+jdk:
+  - openjdk11
+
+# 해당 브랜치가 푸시될 때 수행
+branches:
+  only:
+    - master
+
+# 의존성을 해당 디렉토리에 캐시
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+
+# 푸시될 때 수행하는 명령어
+script: "./gradlew clean build"
+
+# CI 실행 완료시 메일 알림
+notiifcations:
+  email:
+    recipients:
+      - nefertiri972@gmail.com
