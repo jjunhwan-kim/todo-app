@@ -16,6 +16,22 @@ cache:
 # 푸시될 때 수행하는 명령어
 script: "./gradlew clean build"
 
+before_deploy:
+  - zip -r todo-app-backend * # 현재 위치의 모든 파일을 todo-app-backend.zip 파일로 압축
+  - mkdir -p deploy
+  - mv todo-app-backend.zip deploy/todo-app-backend.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis의 Repository의 Environment Variables에 설정된 값
+    secret_acess_key: $AWS_SECRET_KEY # Travis의 Repository의 Environment Variables에 설정된 값
+    bucket: todo-app-backend-build # S3 버킷
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true
+
 # CI 실행 완료시 메일 알림
 notiifcations:
   email:
