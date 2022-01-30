@@ -3,6 +3,6 @@
 spring:
   profiles:
     group:
-      "local": "develop"
-      "dev": "develop"
-      "prod": "production"
+      default: dev
+      dev: dev
+      prod: prod
