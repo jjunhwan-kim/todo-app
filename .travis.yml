@@ -1,0 +1,26 @@
+language: java
+jdk:
+  - openjdk11
+
+# master 브랜치가 푸시될 때 CI 수행
+branches:
+  only:
+    - master
+
+# 의존성을 해당 디렉토리에 캐시
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+
+# 푸시될 때 수행하는 명령어
+script: "./gradlew clean build"
+
+# CI 실행 완료시 메일 알림
+notifications:
+  email:
+    recipients:
+      - nefertiri972@gmail.com
+      - nefertiri@kakao.com
+    on_success: always # default: change
+    on_failure: always # default: always
