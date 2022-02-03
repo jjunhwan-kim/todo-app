@@ -2,7 +2,6 @@
 
 # 변수 선언
 REPOSITORY=~/app/step2
-PROJECT_NAME=todo-app
 EXECUTABLE_NAME=todo
 
 echo "> Build 파일 복사"
@@ -12,7 +11,7 @@ cp $REPOSITORY/zip/*.jar $REPOSITORY
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
 # 명령어 실행결과를 변수에 할당 $()
-CURRENT_PID=$(pgrep -fl ${EXECUTABLE_NAME} | grep jar | awk '{print $1}')
+CURRENT_PID=$(pgrep -fl ${EXECUTABLE_NAME} | grep java | awk '{print $1}')
 
 echo "> 현재 구동중인 애플리케이션 pid: $CURRENT_PID"
 
